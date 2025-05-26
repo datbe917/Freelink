@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>freelink - Anime Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Anime style pastel color palette */
+    :root {
+      --pink-soft: #ffccd5;
+      --purple-soft: #cdb4db;
+      --blue-soft: #99badd;
+      --white-transparent: rgba(255 255 255 / 0.8);
+      --pink-neon: #ff6599;
+      --purple-neon: #bb99ff;
+      --blue-neon: #3399ff;
+      --red-flash: #ff0000;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://i.pinimg.com/originals/32/1a/0b/321a0b76f067dbd157a215027d32992f.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #2a1a0f;
+      padding: 2rem;
+      user-select: none;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Light Sakura petals animation */
+    @keyframes petals {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(600px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    .petal {
+      position: fixed;
+      top: -40px;
+      background: radial-gradient(circle at center, #ffc0cb, #ff9eb3);
+      width: 15px;
+      height: 20px;
+      border-radius: 50% / 60%;
+      opacity: 0.8;
+      animation: petals linear infinite;
+      pointer-events: none;
+      filter: drop-shadow(0 0 3px #ff6194);
+      z-index: 0;
+    }
+
+    /* Flash animation for freelink text */
+    @keyframes flashRed {
+      0%, 100% {
+        color: #ff0000;
+        text-shadow:
+          0 0 5px #ff0000,
+          0 0 15px #ff4d4d,
+          0 0 20px #ff1a1a;
+      }
+      50% {
+        color: #800000;
+        text-shadow: none;
+      }
+    }
+
+    /* Rainbow glow animation for button text */
+    @keyframes rainbowGlow {
+      0%,100%{text-shadow:
+        0 0 5px #ff0000,
+        0 0 10px #ff7f00,
+        0 0 15px #ffff00,
+        0 0 20px #00ff00,
+        0 0 25px #0000ff,
+        0 0 30px #4b0082,
+        0 0 35px #8b00ff;}
+      14%{text-shadow:
+        0 0 5px #ff7f00,
+        0 0 10px #ffff00,
+        0 0 15px #00ff00,
+        0 0 20px #0000ff,
+        0 0 25px #4b0082,
+        0 0 30px #8b00ff,
+        0 0 35px #ff0000;}
+      28%{text-shadow:
+        0 0 5px #ffff00,
+        0 0 10px #00ff00,
+        0 0 15px #0000ff,
+        0 0 20px #4b0082,
+        0 0 25px #8b00ff,
+        0 0 30px #ff0000,
+        0 0 35px #ff7f00;}
+      42%{text-shadow:
+        0 0 5px #00ff00,
+        0 0 10px #0000ff,
+        0 0 15px #4b0082,
+        0 0 20px #8b00ff,
+        0 0 25px #ff0000,
+        0 0 30px #ff7f00,
+        0 0 35px #ffff00;}
+      57%{text-shadow:
+        0 0 5px #0000ff,
+        0 0 10px #4b0082,
+        0 0 15px #8b00ff,
+        0 0 20px #ff0000,
+        0 0 25px #ff7f00,
+        0 0 30px #ffff00,
+        0 0 35px #00ff00;}
+      71%{text-shadow:
+        0 0 5px #4b0082,
+        0 0 10px #8b00ff,
+        0 0 15px #ff0000,
+        0 0 20px #ff7f00,
+        0 0 25px #ffff00,
+        0 0 30px #00ff00,
+        0 0 35px #0000ff;}
+      85%{text-shadow:
+        0 0 5px #8b00ff,
+        0 0 10px #ff0000,
+        0 0 15px #ff7f00,
+        0 0 20px #ffff00,
+        0 0 25px #00ff00,
+        0 0 30px #0000ff,
+        0 0 35px #4b0082;}
+    }
+
+    h1 {
+      font-weight: 900;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #ff0000;
+      animation: flashRed 2s infinite;
+      user-select: none;
+    }
+    .upload-container {
+      background: var(--white-transparent);
+      border-radius: 25px;
+      padding: 1.8rem 2rem;
+      width: 360px;
+      box-shadow:
+        0 0 16px var(--pink-neon),
+        inset 0 0 12px var(--purple-soft);
+      text-align: center;
+      cursor: pointer;
+      border: 3px dashed var(--purple-neon);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #2a1a0f;
+      font-weight: 700;
+    }
+    .upload-container:hover {
+      box-shadow:
+        0 0 20px var(--pink-neon),
+        inset 0 0 20px var(--purple-neon);
+      background: rgba(255 192 203 / 0.9);
+      border-color: var(--pink-neon);
+      color: var(--purple-neon);
+      font-weight: 800;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    #preview {
+      margin-top: 1rem;
+      max-width: 320px;
+      max-height: 320px;
+      border-radius: 18px;
+      box-shadow:
+        0 0 24px var(--blue-neon),
+        0 4px 25px rgba(0,0,0,0.15);
+      border: 4px solid var(--purple-soft);
+      display: none;
+      position: relative;
+      z-index: 10;
+      background: white;
+    }
+    #linkOutput {
+      margin-top: 1rem;
+      width: 100%;
+      height: 110px;
+      border-radius: 18px;
+      padding: 0.75rem 1rem;
+      border: none;
+      resize: none;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+      background-color: var(--pink-soft);
+      color: #6a4370;
+      box-shadow:
+        inset 0 0 14px var(--purple-soft);
+      user-select: all;
+      position: relative;
+      z-index: 10;
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+    #copyBtn {
+      margin-top: 1rem;
+      background: linear-gradient(135deg, var(--pink-neon), var(--purple-neon));
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.8rem;
+      border: none;
+      border-radius: 25px;
+      box-shadow:
+        0 5px 15px var(--pink-neon);
+      cursor: pointer;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      z-index: 10;
+      user-select: none;
+      letter-spacing: 0.05em;
+      text-shadow:
+        0 0 6px #fff,
+        0 0 12px #f3f3ab;
+      animation: rainbowGlow 3s linear infinite;
+    }
+    #copyBtn:hover {
+      background: linear-gradient(135deg, var(--purple-neon), var(--pink-neon));
+      box-shadow:
+        0 8px 22px var(--purple-neon);
+      animation-play-state: paused;
+    }
+    .note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #f7f1a7;
+      font-style: italic;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+      text-shadow: 1px 1px 2px rgba(0 0 0 / 0.7);
+    }
+    /* Keyboard focus style */
+    .upload-container:focus {
+      outline: 3px solid var(--purple-neon);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1>freelink</h1>
+  <label class="upload-container" for="fileInput" tabindex="0" aria-label="Chọn hoặc kéo thả ảnh">
+    Nhấn hoặc kéo thả ảnh vào đây để chuyển đổi thành đường link
+    <input type="file" accept="image/*" id="fileInput" aria-describedby="note" />
+  </label>
+
+  <img id="preview" alt="Xem trước ảnh" />
+
+  <textarea id="linkOutput" readonly aria-live="polite" aria-label="Đường link ảnh"></textarea>
+
+  <button id="copyBtn" aria-live="polite">Sao chép</button>
+
+  <div id="note" class="note">
+    Ảnh sẽ được chuyển sang Data URL (base64). Bạn có thể dùng trực tiếp hoặc lưu lại.
+  </div>
+
+  <script>
+    // Petals falling animation effect
+    const numberOfPetals = 30;
+    const body = document.body;
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.style.left = Math.random() * window.innerWidth + 'px';
+      petal.style.animationDuration = (5 + Math.random() * 8) + 's';
+      petal.style.animationDelay = (Math.random() * 10) + 's';
+      petal.style.width = (10 + Math.random() * 10) + 'px';
+      petal.style.height = (15 + Math.random() * 10) + 'px';
+      petal.style.opacity = 0.7 + Math.random() * 0.3;
+      body.appendChild(petal);
+
+      petal.addEventListener('animationend', () => {
+        petal.remove();
+        createPetal();
+      });
+    }
+    for (let i=0; i< numberOfPetals; i++) createPetal();
+
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const linkOutput = document.getElementById('linkOutput');
+    const copyBtn = document.getElementById('copyBtn');
+    const uploadContainer = document.querySelector('.upload-container');
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) {
+        alert('Vui lòng chọn file ảnh hợp lệ.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        linkOutput.value = e.target.result;
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        linkOutput.focus();
+        linkOutput.select();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        handleFile(fileInput.files[0]);
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (linkOutput.value.trim() === '') return;
+      navigator.clipboard.writeText(linkOutput.value).then(() => {
+        copyBtn.textContent = 'Đã sao chép!';
+        setTimeout(() => (copyBtn.textContent = 'Sao chép'), 1500);
+      }).catch(() => {
+        linkOutput.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Đã sao chép!';
+        setTimeout(() => (copyBtn.textContent = 'Sao chép'), 1500);
+      });
+    });
+
+    uploadContainer.addEventListener('dragover', e => {
+      e.preventDefault();
+      uploadContainer.style.backgroundColor = 'rgba(255 192 203 / 0.6)';
+    });
+    uploadContainer.addEventListener('dragleave', e => {
+      e.preventDefault();
+      uploadContainer.style.backgroundColor = 'var(--white-transparent)';
+    });
+    uploadContainer.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadContainer.style.backgroundColor = 'var(--white-transparent)';
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
+
